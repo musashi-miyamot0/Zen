@@ -1,0 +1,132 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Kufam:ital,wght@0,400..900;1,400..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rokkitt:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kurale&display=swap');
+@import url("../../base.css");
+.searchSVG {
+    width: 30px;
+    height: 30px;
+    transform: translate(10px, 45px);
+}
+
+#Searcher::placeholder {
+    opacity: 60%;
+    color: var(--text-or-element);
+    font-size: 20px;
+    font-family: "Kurale", sans-serif;
+    transform: translate(140px, 2px);
+}
+
+.InputFL {
+    width: 410px;
+    height: 54px;
+    transform: translate(20px, -20px);
+}
+
+#Searcher {
+    font-size: 17px;
+    font-family: var(--font-text-kufam);
+    color: var(--text-or-element);
+    box-shadow: inset 2px 5px 40.3px -13px rgba(0, 0, 0, 0.35);
+    padding-left: 50px;
+    background-color: #262730;
+
+    outline: none;
+    border: none;
+    border-radius: 4px;
+    width: 410px;
+    height: 54px;
+}
+
+.TopUser hr {
+    border: 2px solid #24262e;
+    transform: translateY(260px);
+
+}
+
+.TopUser {
+    justify-self: center;
+    align-items: center;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    transform: translate(20px, 40px);
+    overflow-y:auto;
+    width: 461px;   
+    height: 264px;
+    background-color: var(--color-palet);
+    
+}
+.TopUser::-webkit-scrollbar{
+    width: 10px;
+    border-radius: 4px;
+    background-color: var(--color-back);
+    
+
+}
+.TopUser::-webkit-scrollbar-thumb{
+    border-radius: 4px;
+    background-color: var(--text-or-element);
+}
+.ContainerGlobalSearchText {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    background-color: var(--color-palet);
+    position: relative;
+    width: 461px;
+    height: 30px;
+    border-radius: 4px;
+    transform: translate(20px, 310px);
+
+}
+
+.ContainerGlobalSearchText a {
+    position: relative;
+    font-family: var(--font-text-kufam);
+    color: var(--text-or-element);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.ContainerGlobalSearchText img {
+
+position: relative;
+
+left: -5px;
+}
+
+.searchWindow {
+
+    transform: translate(590px, 300px);
+    background-color: var(--color-panel);
+    width: 550px;
+    height: 416px;
+    border-radius: 4px;
+}
+
+.blockUserInTop{
+    display: grid;
+    grid-template-columns: 90px 40px 1fr;
+    grid-template-rows:repeat(3,1fr);
+    color: white;
+    font-family: var(--font-text-kufam);
+
+    background-color: var(--color-user-opacity);
+
+    list-style: none;
+    height: 60px;
+    width: 90%;
+    margin-top: 10px;
+    p{
+        grid-column-start: 2;
+        grid-row-start: 2;
+        width: max-content;
+        margin: 0;
+    }
+    div{
+        grid-column: 1  ;
+ 
+    }
+}

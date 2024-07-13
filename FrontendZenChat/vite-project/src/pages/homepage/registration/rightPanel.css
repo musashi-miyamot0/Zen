@@ -1,0 +1,81 @@
+@import url("../../base.css");
+
+.rightPanel{
+    transition: 0.5s ease-out;
+    position: absolute;
+    right: 20px;
+    top: 150px;
+    width: 70px;
+    height: 80vh;
+}
+
+.blockProfile{
+    height: 100px;
+    border-radius: 0.75rem;
+    background-color: var(--color-panel);
+    a{
+        text-decoration: none;
+        cursor: pointer;
+        grid-row-start: 3;
+        grid-column-start: 2;
+        color: white;
+        font-family: var(--font-text-kufam);
+    }
+}
+.icoLogin{
+    cursor: pointer;
+    grid-row-start: 2;
+    grid-column-start: 2    ;
+}
+
+.noLogin{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-template-rows: repeat(3,1fr);
+}
+
+.BaseLineStyle{
+    transition: 150ms ease-in-out;
+    background-color: white; 
+    width: 2px;
+    height: 20px;
+    position: fixed;
+}
+
+.RotateOne{
+    rotate: 90deg;
+}
+
+.containerLine{
+    margin-top: 5px;
+    rotate: -45deg;
+}
+.buttonClose:hover{
+    .RotateOne{
+        width: 4px;
+        border-radius: 4px;
+        background-color: var(--text-or-element);
+    }
+    .RotateTwo{
+        background-color: var(--text-or-element);
+        border-radius: 4px;
+        width: 4px;
+    }
+}
+.buttonClose{
+    position: fixed;
+    transform: translate(-25px,35px);
+    display: flex;
+    justify-content: center;
+    border-bottom-left-radius: 4px; 
+    border-top-left-radius: 4px; 
+    background-color:var(--color-panel) ;
+    width: 30px;
+    height: 30px;
+}
+.Slide{
+    transform: translateX(90px);
+}
+.ProfileAndLogin{
+    transition: 0.5s ease-out;
+}

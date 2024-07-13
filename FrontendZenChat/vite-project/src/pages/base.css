@@ -1,0 +1,11 @@
+:root {
+    --color-palet: #1d1e24;
+    --color-back: #262730;
+    --color-panel: #191a20;
+    --color-user-opacity: rgba(255, 255, 255, 0.02);
+    --text-or-element: #99A1CC;
+    --color-online: #79ff86;
+    --color-message-and-uvedom: #ed6e61;
+    --font-text-kufam: 'Kufam', sans-serif;
+    --font-text-rokkit: 'Rokkitt', sans-serif
+}

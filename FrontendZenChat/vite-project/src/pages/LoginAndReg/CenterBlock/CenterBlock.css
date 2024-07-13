@@ -1,0 +1,120 @@
+@import url("../../base.css");
+
+.centerFlexBlock {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+}
+
+@keyframes Gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 50% 50%;
+
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.BlockForm {
+    display: grid;
+    grid-template-columns: 200px 300px 70px 30px;
+    grid-template-rows: 100px 300px ;
+    position: fixed;
+    box-shadow: -1px 13px 13px -7px rgba(0, 0, 0, 0.32);
+    background-size: 400% 400%;
+    transition: 2s ease-out all;
+    animation: Gradient 10s infinite ease-out;
+    background-image: linear-gradient(to right bottom, #22242c41, #191a20, #191a20, #6d608521, #191a20, #191a20);
+    border-radius: 4px;
+    width: 600px;
+    height: 400px;
+    background-color: var(--color-panel);
+
+    h1 {
+        height: max-content;
+        width: max-content;
+        rotate: 90deg;
+        position: relative;
+        top: 80px;
+        left: -150px;
+        font-size: 200px;
+        opacity: 100%;
+        margin: 0;
+        color: #262730;
+        font-family: var(--font-text-kufam);
+    }
+    .buttonClose{
+        background-image: linear-gradient(to right bottom, #22242cc5, #6f748f5e, #5457696b, #6d608521, #191a20, #191a20);
+        box-shadow: -1px 13px 13px -7px rgba(0, 0, 0, 0.32);
+
+    }
+    .Close{
+        grid-column-start: 4;
+        grid-row-start: 1;
+        width: max-content;
+        height: max-content;
+
+    }
+    form{
+
+        flex-direction: column;
+        display: flex;
+        justify-content: center;
+        grid-column-start: 2;
+        grid-row-start: 1;
+
+        width: 300px;
+        height: 400px;
+
+        input{
+            outline: none;
+            background-color: #262730;
+            border-radius: 10px;
+            border: 3px solid var(--text-or-element);
+            margin-top: 20px;
+            width: 100%;
+            height: 30px;
+            font-family: var(--font-text-kufam);
+            color:white
+        }
+
+        .container{
+            margin-top: 20px ;
+            display: flex;
+            justify-content: center;
+        }
+        .container button{
+            cursor: pointer;
+            transition: 0.5s ease-out;
+            color: var(--text-or-element);
+            font-family: var(--font-text-kufam);
+            border-radius: 10px;
+            background-color: #262730;
+            width: 100px;
+            height: 50px;
+            border: 3px solid var(--text-or-element);
+        }
+        .container button:hover{
+            background-color: transparent;
+        }
+        .containerReg{
+            margin-top: 20px;
+            justify-content: center;
+            display: flex;
+            a{
+                font-family: var(--font-text-kufam);
+                text-decoration: none;
+                color: var(--color-online);
+
+            }
+        }
+    }
+}

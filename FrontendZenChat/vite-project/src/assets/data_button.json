@@ -1,0 +1,21 @@
+
+[
+  {
+    "src": "./assets/svg/neuro.svg",
+    "classNameDiv": "neuro",
+    "alt": "AI",
+    "classNameImg": "neuroStyle"
+  },
+  {
+    "src": "./assets/svg/images.svg",
+    "classNameDiv": "images",
+    "alt": "images other",
+    "classNameImg": "ImagesStyle"
+  },
+  {
+    "src": "./assets/svg/send.svg",
+    "classNameDiv": "send",
+    "alt": "send",
+    "classNameImg": "sendStyle"
+  }
+]
