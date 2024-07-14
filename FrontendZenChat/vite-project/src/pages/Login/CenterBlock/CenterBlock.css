@@ -43,8 +43,8 @@
         width: max-content;
         rotate: 90deg;
         position: relative;
-        top: 80px;
-        left: -150px;
+        top:70px;
+        left: -160px;
         font-size: 200px;
         opacity: 100%;
         margin: 0;
@@ -98,7 +98,7 @@
             font-family: var(--font-text-kufam);
             border-radius: 10px;
             background-color: #262730;
-            width: 100px;
+            width: max-content;
             height: 50px;
             border: 3px solid var(--text-or-element);
         }
@@ -109,7 +109,8 @@
             margin-top: 20px;
             justify-content: center;
             display: flex;
-            a{
+            p{
+                cursor: pointer;
                 font-family: var(--font-text-kufam);
                 text-decoration: none;
                 color: var(--color-online);

@@ -10,8 +10,8 @@ from zenChat import settings
 
 urlpatterns = [
     path('api/v1/search/', views.SearchUser.as_view(), name='test'),
-    
-    # path('api/v1/', views.ListALlUser.as_view(), name='test'),
+    path('api/v1/register/', views.RegisterUser.as_view(), name='register'),
+    path('api/v1/token/', views.CustomTokenObtainPairView.as_view(), name='token_obtain_pair'),
     
                ]
 

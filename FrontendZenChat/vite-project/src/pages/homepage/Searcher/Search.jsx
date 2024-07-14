@@ -17,7 +17,7 @@ export default function Searcher() {
       setSearcher(event.target.value);
     }
   };
-
+  
   useEffect(() => {
     if (searcher) {
       axios

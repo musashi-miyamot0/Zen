@@ -20,6 +20,10 @@ export default function RightPanel({ userLogin }) {
 function SwapLocalSettings() {
   let settings = JSON.parse(localStorage.getItem("profileBlock"));
   let profile = document.querySelector(".rightPanel");
+  if (settings===null){
+    localStorage.setItem("profileBlock", false);
+    profile.classList.toggle("Slide");
+  }
 
   switch (settings) {
     case true:
@@ -77,10 +81,10 @@ function BlockProfile({ user }) {
           <img
             width={40}
             className="icoLogin"
-            src="http://127.0.0.1:8000/media/svg/login.svg"
+            src="http://127.0.0.1:8000/media/svg/login.svg/"
             alt="Login"
           />
-          <Link to="/login">Войти</Link>
+          <Link to="/login-and-reg">Войти</Link>
         </div>
       )}
     </div>
@@ -88,10 +92,10 @@ function BlockProfile({ user }) {
 }
 
 RightPanel.propTypes = {
-  userLogin: PropTypes.object.isRequired,
+  userLogin: PropTypes.object
 };
 BlockProfile.propTypes = {
-  user: PropTypes.object.isRequired,
+  user: PropTypes.object,
 };
 ButtonClose.propTypes = {
   widthLine: PropTypes.number,

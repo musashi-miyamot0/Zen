@@ -1,13 +1,16 @@
-import Homepage from "./pages/homepage/homepage.jsx"
-import LoginAndReg from "./pages/LoginAndReg/LoginAndReg.jsx"
-import { Routes, Route, Link } from 'react-router-dom'
+import Homepage from "./pages/homepage/homepage.jsx";
+import Login from "./pages/Login/Login.jsx";
+import { Routes, Route } from "react-router-dom";
+import Private from "./utils/route/Private.jsx";
 function App() {
   return (
     <>
-
       <Routes>
-        <Route path='login/' element={<LoginAndReg/>} ></Route>
-        <Route path='/' element={<Homepage/>} ></Route>
+        <Route  exact path="/login-and-reg/" element={<Login />}></Route>
+
+        <Route  path='/'element={<Private/>}>
+            <Route exact path="/" element={<Homepage />}></Route>
+        </Route>
       </Routes>
     </>
   );
