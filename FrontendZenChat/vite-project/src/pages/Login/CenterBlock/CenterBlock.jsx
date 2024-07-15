@@ -2,9 +2,9 @@
 import "./CenterBlock.css";
 import "../../homepage/registration/rightPanel.css";
 import { ButtonClose } from "../../homepage/registration/left_panel.jsx";
-import { Link, useLocation } from "react-router-dom";
+import { Link, Navigate, useLocation } from "react-router-dom";
 import { useState } from "react";
-import PropTypes, { func } from "prop-types";
+import PropTypes, { func, object } from "prop-types";
 import { useSelector, useDispatch } from "react-redux";
 import {
   setAction,
@@ -22,38 +22,41 @@ export default function CenterBlock() {
   const email = useSelector((state) => state.authSlice.email);
   const password = useSelector((state) => state.authSlice.password);
   const username = useSelector((state) => state.authSlice.name);
+  const location = useSelector((state) => state.authSlice.location);
+
   dispatch(setLocation(useLocation()));
-
-  function Registr(e) {
+  const Login = (e) => {
     e.preventDefault();
-    axios
-      .post("http://127.0.0.1:8000/api/v1/register/", {
-        password: password,
-        username: username,
-        email:email,
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-      .then((d) => {
-        console.log(d);
-      });
-  }
 
-  function Login(e) {
-    e.preventDefault();
-    axios
-    .post("http://127.0.0.1:8000/api/v1/token/", {
+    axios.post("http://localhost:8000/api/v1/token/", {
       password: password,
       username: username,
       headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-    .then((d) => {
-      console.log(d);
+        "Content-Type": "application/json",
+      },
+    }).then((d)=>{
+      localStorage.setItem('access',d.data.access);
+      return <Navigate to={location.state?.from?.pathname || '/'}/>
+
     });
-  }
+    
+    
+  };
+
+  const Registr = (e) => {
+    e.preventDefault();
+    axios.post("http://localhost/api/v1/register/", {
+      password: password,
+      username: username,
+      email: email,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  };
+
+  //TODO Добавить обработчики данных в запросы
+
   return (
     <div className="centerFlexBlock">
       <BlockForm title={"ZEN"}>
@@ -61,7 +64,9 @@ export default function CenterBlock() {
           <FormLogin onSubmit={Registr}>
             <input
               type="email"
-              onChange={(e) => dispatch(setEmail(e.target.value))}
+              onChange={(e) => {
+                dispatch(setEmail(e.target.value));
+              }}
               name="email"
               placeholder="Почта"
             />
@@ -101,12 +106,16 @@ function FormLogin({ children, onSubmit }) {
       <input
         type="text"
         name="username"
-        onChange={(e) => dispatch(setName(e.target.value))}
+        onChange={(e) => {
+          dispatch(setName(e.target.value));
+        }}
         placeholder="Имя пользователя"
       />
       <input
         type="password"
-        onChange={(e) => dispatch(setPassword(e.target.value))}
+        onChange={(e) => {
+          dispatch(setPassword(e.target.value));
+        }}
         name="password"
         placeholder="Пароль"
       />

@@ -23,14 +23,11 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
     TokenVerifyView
 ) 
-from zen.serializers import Check
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include(urls)),
     path("__reload__/", include("django_browser_reload.urls")),
     path('api/v1/auth/',include('rest_framework.urls')),
-
-    path('api/v1/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/v1/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
 
     
