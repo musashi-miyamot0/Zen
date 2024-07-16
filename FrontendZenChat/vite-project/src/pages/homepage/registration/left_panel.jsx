@@ -2,7 +2,7 @@ import "./rightPanel.css";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
-export default function RightPanel({ userLogin }) {
+export default function RightPanel({ user }) {
   const base_class = "rightPanel rightBlockBase";
   return (
     <div
@@ -12,7 +12,7 @@ export default function RightPanel({ userLogin }) {
           : base_class
       }
     >
-      <BlockProfile user={userLogin} />
+      <BlockProfile user={user} />
     </div>
   );
 }
@@ -20,7 +20,7 @@ export default function RightPanel({ userLogin }) {
 function SwapLocalSettings() {
   let settings = JSON.parse(localStorage.getItem("profileBlock"));
   let profile = document.querySelector(".rightPanel");
-  if (settings===null){
+  if (settings === null) {
     localStorage.setItem("profileBlock", false);
     profile.classList.toggle("Slide");
   }
@@ -71,7 +71,12 @@ export function ButtonClose({
 function BlockProfile({ user }) {
   return (
     <div>
-      <ButtonClose widthButton={30} heightButton={30} heightLine={7} widthLine={8} />
+      <ButtonClose
+        widthButton={30}
+        heightButton={30}
+        heightLine={7}
+        widthLine={8}
+      />
       {user ? (
         <div className="">
           <img src="" alt="" />
@@ -92,7 +97,7 @@ function BlockProfile({ user }) {
 }
 
 RightPanel.propTypes = {
-  userLogin: PropTypes.object
+  user: PropTypes.object,
 };
 BlockProfile.propTypes = {
   user: PropTypes.object,

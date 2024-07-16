@@ -1,7 +1,8 @@
 
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
-
+from rest_framework_simplejwt.models import TokenUser
+from rest_framework_simplejwt.serializers import TokenObtainSerializer
 class Search(serializers.ModelSerializer):
     
     class Meta:
@@ -15,8 +16,9 @@ class AddUser(serializers.ModelSerializer):
         fields = ('username','password','email',)
         
 
-class Check(serializers.ModelSerializer):
+
+class AuthSerializer(serializers.Serializer):
     
     class Meta:
         model = get_user_model()
-        fields = "__all__"
+        fields = '__all__'

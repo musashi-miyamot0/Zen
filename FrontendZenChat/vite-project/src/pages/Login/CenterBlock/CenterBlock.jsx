@@ -15,7 +15,7 @@ import {
   setClear,
 } from "../../../store/slice/appSlice.js";
 import axios from "axios";
-
+import instance from "../../../api.config.js"
 export default function CenterBlock() {
   const dispatch = useDispatch();
   const action = useSelector((state) => state.authSlice.action);
@@ -28,19 +28,24 @@ export default function CenterBlock() {
   const Login = (e) => {
     e.preventDefault();
 
-    axios.post("http://localhost:8000/api/v1/token/", {
-      password: password,
-      username: username,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }).then((d)=>{
-      localStorage.setItem('access',d.data.access);
-      return <Navigate to={location.state?.from?.pathname || '/'}/>
-
-    });
-    
-    
+    axios
+      .post(
+        "http://localhost:8000/api/v1/token/",
+        {
+          password: password,
+          username: username,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        }
+      )
+      .then((d) => {
+        localStorage.setItem("access", d.data.access);
+        return <Navigate to={location.state?.from?.pathname || "/"} />;
+      });
   };
 
   const Registr = (e) => {

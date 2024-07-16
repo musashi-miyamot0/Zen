@@ -1,17 +1,18 @@
 from django.shortcuts import render
 from rest_framework import generics
+from rest_framework.views import APIView
 from django.contrib.auth import get_user_model
 from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework import generics
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
-from .serializers import Search, AddUser, Check
+from .serializers import Search, AddUser, AuthSerializer
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework import status
 from rest_framework_simplejwt.exceptions import TokenError, InvalidToken
 from django.middleware.csrf import get_token
 from django.contrib.auth.hashers import make_password
-
+from rest_framework_simplejwt.authentication import JWTAuthentication
 
 class SearchUser(generics.ListAPIView):
     serializer_class = Search
@@ -49,10 +50,10 @@ class CustomTokenObtainPairView(TokenObtainPairView):
         return response
 
 
-class Test(generics.ListAPIView):
-    queryset = get_user_model().objects.all()
-    serializer_class = Check
-    permission_classes = (IsAuthenticated,)
+# class Test(generics.ListAPIView):
+#     queryset = get_user_model().objects.all()
+#     serializer_class = Check
+#     permission_classes = (IsAuthenticated,)
 
 
 class TokenRefreshViewCustom(TokenRefreshView):
@@ -65,3 +66,12 @@ class TokenRefreshViewCustom(TokenRefreshView):
             raise InvalidToken(e.args[0])
 
         return Response(serializer.validated_data, status=status.HTTP_200_OK)
+
+class GetUser(APIView,JWTAuthentication):
+    user_model = get_user_model()
+    def get(self, request: Request, *args, **kwargs):
+        user, token =  self.authenticate(request=request)
+        obj_user = AuthSerializer(get_user_model().objects.get(username=user).pk).data
+        return Response({"user":obj_user})
+        # return Response({'2':self.authenticate(request=request)})
+        
