@@ -2,7 +2,7 @@
 import "./CenterBlock.css";
 import "../../homepage/registration/rightPanel.css";
 import { ButtonClose } from "../../homepage/registration/left_panel.jsx";
-import { Link, Navigate, useLocation } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import PropTypes, { func, object } from "prop-types";
 import { useSelector, useDispatch } from "react-redux";
@@ -14,17 +14,19 @@ import {
   setPassword,
   setClear,
 } from "../../../store/slice/appSlice.js";
+import { setAuth } from "../../../store/slice/statusAuthSlice.js";
 import axios from "axios";
-import instance from "../../../api.config.js"
+import instance from "../../../api.config.js";
 export default function CenterBlock() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const action = useSelector((state) => state.authSlice.action);
   const email = useSelector((state) => state.authSlice.email);
   const password = useSelector((state) => state.authSlice.password);
   const username = useSelector((state) => state.authSlice.name);
   const location = useSelector((state) => state.authSlice.location);
-
-  dispatch(setLocation(useLocation()));
+  const currentLocation = useLocation();
+  dispatch(setLocation(currentLocation));
   const Login = (e) => {
     e.preventDefault();
 
@@ -44,13 +46,14 @@ export default function CenterBlock() {
       )
       .then((d) => {
         localStorage.setItem("access", d.data.access);
-        return <Navigate to={location.state?.from?.pathname || "/"} />;
+        dispatch(setAuth(true));
+        return navigate("/");
       });
   };
 
   const Registr = (e) => {
     e.preventDefault();
-    axios.post("http://localhost/api/v1/register/", {
+    axios.post("http://localhost:8000/api/v1/register/", {
       password: password,
       username: username,
       email: email,

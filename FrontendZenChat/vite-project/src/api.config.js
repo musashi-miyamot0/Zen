@@ -1,22 +1,17 @@
 import axios from "axios";
-import { setUser, setAuth } from "./store/slice/statusAuthSlice.js";
-import { useDispatch } from "react-redux";
-export const instance = axios.create({
+
+const instance = axios.create({
   // к запросу будет приуепляться cookies
   withCredentials: true,
-  baseURL: "http://localhost/",
+  baseURL: "http://localhost:8000/",
 });
-
 
 // создаем перехватчик запросов
 // который к каждому запросу добавляет accessToken из localStorage
-instance.interceptors.request.use(
-  (config) => {
-    config.headers.Authorization = `Bearer ${localStorage.getItem("access")}`
-    return config
-  }
-)
-
+instance.interceptors.request.use((config) => {
+  config.headers.Authorization = `Bearer ${localStorage.getItem("access")}`;
+  return config;
+});
 
 // создаем перехватчик ответов
 // который в случае невалидного accessToken попытается его обновить
@@ -24,39 +19,43 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
   // в случае валидного accessToken ничего не делаем:
   (config) => {
-    const dispatch = useDispatch()
-    dispatch(setAuth(true))
     return config;
   },
   // в случае просроченного accessToken пытаемся его обновить:
   async (error) => {
-    const dispatch = useDispatch()
-    dispatch(setAuth(false))
-   // предотвращаем зацикленный запрос, добавляя свойство _isRetry 
-   const originalRequest = {...error.config};
-   originalRequest._isRetry = true; 
+    // предотвращаем зацикленный запрос, добавляя свойство _isRetry
+    const originalRequest = { ...error.config };
+    originalRequest._isRetry = true;
     if (
       // проверим, что ошибка именно из-за невалидного accessToken
-      error.response.status === 401 && 
+      error.response.status === 401 &&
       // проверим, что запрос не повторный
       error.config &&
       !error.config._isRetry
     ) {
       try {
         // запрос на обновление токенов
-        const resp = await instance.get("/api/v1/refresh");
+        const resp = await axios.post(
+          "http://localhost:8000/api/v1/token/refresh/",
+          {},
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+            withCredentials: true,
+          }
+        );
         // сохраняем новый accessToken в localStorage
-        localStorage.setItem("access", resp.data.accessToken);
+        localStorage.setItem("access", resp.data.access);
         // переотправляем запрос с обновленным accessToken
-        const dispatch = useDispatch()
-        dispatch(setAuth(true))
         return instance.request(originalRequest);
       } catch (error) {
         console.log("AUTH ERROR");
       }
     }
     // на случай, если возникла другая ошибка (не связанная с авторизацией)
-    // пробросим эту ошибку 
+    // пробросим эту ошибку
     throw error;
   }
 );
+export default instance;

@@ -1,17 +1,16 @@
 import "../app.css";
 import ava from "../../../assets/загрузка.jpeg";
 import data from "../../../assets/fake_data_us.json";
-import { useDispatch, useSelector } from "react-redux";
+// import { useDispatch, useSelector } from "react-redux";
 
 function User() {
-  const userAuth = useSelector(state=>state.StatusApp.user)
-  const dispatch = useDispatch()
+  // const userAuth = useSelector((state) => state.StatusApp.user);
+  // const dispatch = useDispatch();
   return (
     <>
       {data.map((user) => {
         return (
           <div key={user.Name} className="User">
-                      {userAuth}
             <div className="Data_User">
               {user.Name.length > 7 ? (
                 <p className="NameUser">{user.Name.substring(0, 6) + "..."}</p>

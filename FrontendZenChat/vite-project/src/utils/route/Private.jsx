@@ -9,20 +9,12 @@ import { setUser, setAuth } from "../../store/slice/statusAuthSlice.js";
 const Private = () => {
   const location = useLocation();
   const dispatch = useDispatch();
-  const status = useSelector((state) => {
-    state.StatusApp.is_auth;
-  });
-  const user = useSelector((state) => {
-    state.StatusApp.user;
-  });
+  const status = useSelector((state) => state.StatusApp.is_auth);
 
-
-
-  if (!status) {
-    console.log('1')
-    return <Outlet />;
-  } else {
-    return <Navigate to="/login-and-reg/" />;
-  }
+  return (
+    <>
+      <Outlet />
+    </>
+  );
 };
 export default Private;
