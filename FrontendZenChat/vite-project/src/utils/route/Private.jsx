@@ -9,12 +9,11 @@ import { setUser, setAuth } from "../../store/slice/statusAuthSlice.js";
 const Private = () => {
   const location = useLocation();
   const dispatch = useDispatch();
-  const status = useSelector((state) => state.StatusApp.is_auth);
-
-  return (
-    <>
-      <Outlet />
-    </>
-  );
+  const status = JSON.parse(localStorage.getItem("is_auth"));
+  console.log(status);
+  if (status) {
+    return <Outlet />;
+  }
+  return <Navigate to="/login-and-reg/" state={{ from: location }} replace />;
 };
 export default Private;

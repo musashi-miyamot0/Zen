@@ -46,6 +46,7 @@ export default function CenterBlock() {
       )
       .then((d) => {
         localStorage.setItem("access", d.data.access);
+        localStorage.setItem("is_auth", true);
         dispatch(setAuth(true));
         return navigate("/");
       });

@@ -17,8 +17,9 @@ class AddUser(serializers.ModelSerializer):
         
 
 
-class AuthSerializer(serializers.Serializer):
+class AuthSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = get_user_model()
-        fields = '__all__'
+        fields = ('username', 'photo','id',)
+        

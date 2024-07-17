@@ -2,10 +2,11 @@ import "./rightPanel.css";
 
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-
-import { useSelector } from "react-redux"; // Added this import
+import { setAuth, setUser } from "../../../store/slice/statusAuthSlice";
+import { useSelector, useDispatch } from "react-redux"; // Added this import
 import anonym from "../../../assets/img/image.avif";
-
+import instance from "../../../api.config";
+import { useNavigate } from "react-router-dom";
 export default function RightPanel({ user }) {
   const base_class = "rightPanel rightBlockBase";
 
@@ -89,6 +90,32 @@ export function ButtonClose({
 
 function BlockProfile() {
   const user = useSelector((state) => state.StatusApp.user); // Using useSelector here
+  const dispatch = useDispatch();
+
+  const navigate = useNavigate();
+  async function logout() {
+    await instance
+      .post(
+        "http://localhost:8000/api/v1/token/kill-token/",
+        {},
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        }
+      )
+      .then((data) => {
+        if (data.request.status === 205) {
+          localStorage.setItem("access", null);
+          dispatch(setAuth(false));
+          dispatch(setUser(null));
+          localStorage.setItem("is_auth", false);
+          navigate("/login-and-reg/");
+        }
+      });
+  }
+  // ... остальной код ...
 
   return (
     <div>
@@ -108,6 +135,7 @@ function BlockProfile() {
             <img width={40} height={40} src={anonym} alt="Anonym" />
           )}
           <Link to="/profile/"> {user.username}</Link>{" "}
+          <p onClick={logout}>Выйти</p>
         </div>
       ) : (
         <div className="blockProfile Login">
@@ -118,7 +146,7 @@ function BlockProfile() {
             src="http://127.0.0.1:8000/media/svg/login.svg/"
             alt="Login"
           />{" "}
-          <Link to="/login-and-reg">Войти</Link>{" "}
+          <Link to="/login-and-reg">Войти</Link>
         </div>
       )}
     </div>

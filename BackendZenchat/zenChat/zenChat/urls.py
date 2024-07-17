@@ -21,14 +21,15 @@ from zen import urls
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
-    TokenVerifyView
-) 
+    TokenVerifyView,
+    TokenViewBase,
+    TokenBlacklistView,
+)
+
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include(urls)),
     path("__reload__/", include("django_browser_reload.urls")),
-    path('api/v1/auth/',include('rest_framework.urls')),
-    path('api/v1/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
-
-    
+    path("api/v1/auth/", include("rest_framework.urls")),
+    path("api/v1/token/verify/", TokenVerifyView.as_view(), name="token_verify"),
 ]
