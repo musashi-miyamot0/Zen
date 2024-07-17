@@ -11,9 +11,7 @@ const Private = () => {
   const dispatch = useDispatch();
   const status = JSON.parse(localStorage.getItem("is_auth"));
   console.log(status);
-  if (status) {
-    return <Outlet />;
-  }
-  return <Navigate to="/login-and-reg/" state={{ from: location }} replace />;
+
+  return <Outlet />;
 };
 export default Private;

@@ -1,24 +1,20 @@
-from django.shortcuts import render
-from rest_framework import generics
-from rest_framework.views import APIView
 from django.contrib.auth import get_user_model
+from django.contrib.auth.hashers import make_password
+from rest_framework import generics, status
+from rest_framework.permissions import AllowAny
 from rest_framework.request import Request
 from rest_framework.response import Response
-from rest_framework import generics
+from rest_framework.views import APIView
+from rest_framework_simplejwt.authentication import JWTAuthentication
+from rest_framework_simplejwt.exceptions import TokenError, InvalidToken
+from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
     TokenBlacklistView,
 )
-from .serializers import Search, AddUser, AuthSerializer
-from rest_framework.permissions import AllowAny, IsAuthenticated
-from rest_framework import status
-from rest_framework_simplejwt.exceptions import TokenError, InvalidToken
-from django.middleware.csrf import get_token
-from django.contrib.auth.hashers import make_password
-from rest_framework_simplejwt.authentication import JWTAuthentication
 
-from rest_framework_simplejwt.tokens import RefreshToken
+from .serializers import Search, AddUser, AuthSerializer
 
 
 class SearchUser(generics.ListAPIView):
@@ -61,12 +57,6 @@ class CustomTokenObtainPairView(TokenObtainPairView):
         )
         response["Access-Control-Allow-Credentials"] = True
         return response
-
-
-# class Test(generics.ListAPIView):
-#     queryset = get_user_model().objects.all()
-#     serializer_class = Check
-#     permission_classes = (IsAuthenticated,)
 
 
 class TokenRefreshViewCustom(TokenRefreshView):

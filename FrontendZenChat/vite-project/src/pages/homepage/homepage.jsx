@@ -18,7 +18,7 @@ export default function Homepage() {
       .then((data) => {
         dispatch(setUser(data.data.user));
       });
-  }, []);
+  }, [dispatch, user]);
 
   return (
     <>

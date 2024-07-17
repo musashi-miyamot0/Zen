@@ -8,19 +8,19 @@ body {
 }
 
 .panel {
-
-    overflow-y: hidden;
-    overflow-x: auto;
-    display: flex;
-    justify-self: center;
-    position: absolute;
+    overflow-y: auto;
+    overflow-x: hidden;
+    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr 400px 1fr;
+    grid-template-rows: 1fr 90vh 1fr;
+    position: fixed;
     top: 0.625rem;
     left: 1rem;
     border-radius: 0.75rem;
     background-color: var(--color-panel);
-    width: 98%;
-    height: 7.5rem;
-    box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.5);
+    width: 400px;
+    height: 98vh;
 }
 
 .panel::-webkit-scrollbar {
@@ -40,34 +40,33 @@ body {
 }
 
 .NameUser {
-    position: relative;
-    top: 5rem;
-    left: 5px;
+    margin: 0;
+    grid-column-start: 4;
+    width: max-content;
     color: white;
     font-family: var(--font-text-kufam);
 
 }
 
+.circleDiv {
+    grid-column-start: 3;
+    grid-row-start: 2;
+}
+
 .ImageAva {
+
+    grid-column-start: 2;
     box-shadow: -5px 0px 24px -2px rgba(0, 0, 0, 0.75);
-    -webkit-box-shadow: -5px 0px 24px -2px rgba(0, 0, 0, 0.75);
-    -moz-box-shadow: -5px 0px 24px -2px rgba(0, 0, 0, 0.75);
-    box-shadow: #191a20;
-    position: relative;
-    bottom: 85px;
-    left: 40px;
-    border-radius: 100px;
-    width: 76px;
-    height: 76px;
+    grid-row-start: 2;
+    grid-column-end: 3;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
 }
 
 .StatusUserText {
-    position: relative;
-    top: 2.5rem;
-    left: 68px;
-    margin: 0;
-    padding-top: 0.125rem;
-    padding-left: 0.3125rem;
+
+
     font-size: 18px;
     width: 2.5rem;
     font-family: var(--font-text-rokkit);
@@ -75,15 +74,10 @@ body {
     border-radius: 0.25rem;
 }
 
-.StatusUser {
-    position: relative;
-    top: 2.5rem;
-    left: 6rem;
-    margin: 0;
-}
+
 
 .StatusUserTime {
-
+    margin: 0;
 
     padding-top: 0.125rem;
     padding-left: 0.3125rem;
@@ -96,9 +90,8 @@ body {
 }
 
 .CircleStatus {
-    position: relative;
-    left: 95px;
-    bottom: 5px;
+
+
     z-index: 100;
     width: 13px;
     height: 13px;
@@ -115,22 +108,135 @@ body {
 }
 
 .Data_User {
-    width: 150px;
-    height: 121px;
-    resize: none;
+    display: grid;
+    grid-template-columns: 30px 40px 20px 80px 1fr;
+    grid-template-rows: repeat(3, 1fr);
+    height: 100%;
+
+    align-items: center;
+
 }
 
 .User {
+    height: 80px;
+    width: 90%;
 
-    border-radius: 0.25rem;
-    margin-left: 0.9375rem;
-    background-color: var(--color-user-opacity);
-    opacity: 100%;
-    width: 150px;
-    height: 121px;
 }
 
 .back {
     width: 7.5625rem;
     height: 7.5625rem;
+}
+
+.User:hover {
+    background-color: var(--color-user-opacity);
+}
+
+.User_List {
+    z-index: -20;
+    grid-column-start: 2;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    grid-row-start: 2;
+    width: 100%;
+}
+
+.circleDiv {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+}
+
+.StatusUserTimeDiv {
+    display: flex;
+    justify-content: end;
+    width: 100%;
+    grid-column-start: 5;
+    grid-row-start: 1;
+}
+
+
+@keyframes animationBurgerMenu {
+    0% {
+        .one_line {
+            transform: rotate(20deg);
+        }
+
+    }
+
+    100% {
+        transform: rotate(45deg);
+    }
+}
+
+
+
+.burgerMenu {
+    z-index: 440;
+    width: 100%;
+    display: flex;
+    justify-content: end;
+
+    height: 40px;
+
+    grid-column-start: 2;
+    grid-row-start: 1;
+}
+
+.burgerMenuDivContainer {
+
+
+
+
+    margin-right: 20px;
+    width: 40px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .burgerMenuDiv {
+        z-index: 440;
+        margin-top: 8px;
+        width: 90%;
+        height: 3px;
+        background-color: white;
+    }
+}
+
+.burgerMenuDiv {
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.burgerMenuDivContainer.animationBurgerMenu .one-line {
+    transform: rotate(45deg) translate(10px, 10px);
+}
+
+.burgerMenuDivContainer.animationBurgerMenu .two-line {
+    opacity: 0;
+}
+
+.burgerMenuDivContainer.animationBurgerMenu .three-line {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
+
+.darkfoucus {
+
+    filter: blur(10px);
+    display: none;
+
+    position: absolute;
+    left: 0px;
+    top: 0;
+
+
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.28);
 }

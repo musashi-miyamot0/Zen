@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import "./CenterBlock.css";
 import "../../homepage/registration/rightPanel.css";
-import { ButtonClose } from "../../homepage/registration/left_panel.jsx";
+
 import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import PropTypes, { func, object } from "prop-types";
@@ -93,14 +93,7 @@ function BlockForm({ title, children, customClassForm }) {
   return (
     <div className={customClassForm + " BlockForm"}>
       <h1>{title}</h1>
-      <Link className="Close" to="/">
-        <ButtonClose
-          rounded={4}
-          onClick={() => {
-            dispatch(setClear());
-          }}
-        />
-      </Link>
+      <Link className="Close" to="/"></Link>
       {children}
     </div>
   );

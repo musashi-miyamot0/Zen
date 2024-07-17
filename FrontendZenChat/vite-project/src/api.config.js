@@ -50,6 +50,7 @@ instance.interceptors.response.use(
         // переотправляем запрос с обновленным accessToken
         return instance.request(originalRequest);
       } catch (error) {
+        window.location.href = "/login-and-reg/";
         console.log("AUTH ERROR");
       }
     }
